@@ -54,8 +54,7 @@ function CompanyIcon({
         <img
           src={logo}
           alt={shortName}
-          className="w-full h-full object-contain"
-          style={{ mixBlendMode: "screen", opacity: 0.9 }}
+          className="w-full h-full object-contain p-1.5"
         />
       ) : (
         <span className="text-xs font-bold text-white/60 tracking-wide">
