@@ -51,7 +51,7 @@ export default function PortfolioHome() {
       <div className="h-20" />
 
       {/* Vertical side labels */}
-      <div className="fixed left-2 inset-y-0 z-30 flex items-center pointer-events-none select-none">
+      <div className="fixed left-2 inset-y-0 z-30 hidden md:flex items-center pointer-events-none select-none">
         <span
           className="text-[10px] tracking-[0.4em] font-medium uppercase text-[var(--text-15)]"
           style={{ writingMode: "vertical-lr", transform: "rotate(180deg)" }}
@@ -59,7 +59,7 @@ export default function PortfolioHome() {
           FULL STACK
         </span>
       </div>
-      <div className="fixed right-2 inset-y-0 z-30 flex items-center pointer-events-none select-none">
+      <div className="fixed right-2 inset-y-0 z-30 hidden md:flex items-center pointer-events-none select-none">
         <span
           className="text-[10px] tracking-[0.4em] font-medium uppercase text-[var(--text-15)]"
           style={{ writingMode: "vertical-lr" }}
@@ -68,15 +68,15 @@ export default function PortfolioHome() {
         </span>
       </div>
 
-      <main className="pt-4 px-10 pb-20 max-w-5xl mx-auto">
+      <main className="pt-4 px-4 sm:px-10 pb-20 max-w-5xl mx-auto">
         {/* ── Hero grid: coluna esq completa + direita ── */}
-        <div className="grid grid-cols-3 gap-3 mb-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-10">
           {/* COLUNA ESQUERDA */}
           <div className="flex flex-col gap-3">
             {/* Profile name card */}
             <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-7 flex flex-col justify-end flex-1 card-surface">
               <h1
-                className="text-[4.2rem] leading-none tracking-tight text-[var(--text)]"
+                className="text-[2.6rem] sm:text-[4.2rem] leading-none tracking-tight text-[var(--text)]"
                 style={{ fontFamily: "var(--font-playfair)", fontWeight: 700 }}
               >
                 Pedro
@@ -122,7 +122,7 @@ export default function PortfolioHome() {
           </div>
 
           {/* COLUNA DIREITA */}
-          <div className="col-span-2 flex flex-col gap-3">
+          <div className="col-span-1 md:col-span-2 flex flex-col gap-3">
             {/* Tags strip */}
             <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] px-5 py-3.5 flex items-center justify-between card-surface">
               <div className="flex items-center flex-wrap gap-y-1">
@@ -209,7 +209,7 @@ export default function PortfolioHome() {
           <div className="flex gap-3 overflow-x-auto pb-2 snap-x snap-mandatory scrollbar-hide">
             {recentContent.map((item) => {
               const cardClass = "rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] overflow-hidden hover:bg-[var(--hover-bg-xs)] hover:border-[var(--border-hover)] transition-colors card-surface flex flex-col shrink-0 snap-start";
-              const cardStyle = { width: "calc(25% - 9px)" };
+              const cardStyle = { minWidth: "260px", width: "260px" };
               const cardContent = (
                 <>
                   {item.thumbnail && (
@@ -323,7 +323,7 @@ export default function PortfolioHome() {
         {/* ── Certifications ── */}
         <section id="certifications">
           <h2 className="text-4xl mb-5" style={{ fontFamily: "var(--font-playfair)" }}>Certificações</h2>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {certifications.map((cert) => {
               const hasImage = !!cert.image;
               const hasLink = !!cert.link;

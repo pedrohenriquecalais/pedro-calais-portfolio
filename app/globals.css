@@ -147,3 +147,15 @@ html[data-theme="light"] .card-surface-sm {
 /* Hide scrollbar */
 .scrollbar-hide { scrollbar-width: none; -ms-overflow-style: none; }
 .scrollbar-hide::-webkit-scrollbar { display: none; }
+
+/* ── Mobile: projetos empilhados ── */
+@media (max-width: 640px) {
+  .feat-row {
+    flex-direction: column;
+    height: auto !important;
+  }
+  .feat-row .feat-card {
+    height: 180px !important;
+    flex-grow: 1 !important;
+  }
+}
