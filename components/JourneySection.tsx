@@ -47,7 +47,7 @@ function CompanyIcon({
 }) {
   return (
     <div
-      className="w-11 h-11 rounded-xl shrink-0 flex items-center justify-center overflow-hidden"
+      className="w-14 h-14 rounded-xl shrink-0 flex items-center justify-center overflow-hidden"
       style={{ background: color }}
     >
       {logo ? (
