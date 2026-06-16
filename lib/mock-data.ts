@@ -285,7 +285,7 @@ export const journey = {
       current: false,
       description: "Suporte a usuários, testes em produção e análise de logs. Consultas e atualizações com MySQL e MongoDB.",
       tags: ["MySQL", "MongoDB", "Logs"],
-      color: "#transparentffffff",
+      color: "#ffffff",
       logo: "/logos/azapfy.png",
     },
   ],
