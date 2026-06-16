@@ -1,26 +1,149 @@
 @import "tailwindcss";
 
+/* ── Dark mode (default) ── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #0a0a0a;
+  --bg-card: #141414;
+  --bg-elevated: #111111;
+  --bg-elevated-2: #1a1a1a;
+  --border: rgba(255,255,255,0.10);
+  --border-subtle: rgba(255,255,255,0.15);
+  --border-hover: rgba(255,255,255,0.22);
+  --border-faint: rgba(255,255,255,0.05);
+  --text: #ffffff;
+  --text-60: rgba(255,255,255,0.60);
+  --text-50: rgba(255,255,255,0.50);
+  --text-45: rgba(255,255,255,0.45);
+  --text-40: rgba(255,255,255,0.40);
+  --text-35: rgba(255,255,255,0.35);
+  --text-30: rgba(255,255,255,0.30);
+  --text-25: rgba(255,255,255,0.25);
+  --text-20: rgba(255,255,255,0.20);
+  --text-15: rgba(255,255,255,0.15);
+  --hover-bg: rgba(255,255,255,0.07);
+  --hover-bg-sm: rgba(255,255,255,0.10);
+  --hover-bg-xs: rgba(255,255,255,0.03);
+  --invert-bg: #ffffff;
+  --invert-text: #000000;
+  --invert-hover: rgba(255,255,255,0.88);
+  --cursor-ring: rgba(255,255,255,0.70);
+  --cursor-dot: #ffffff;
+}
+
+/* ── Light mode — fundo creme quente, cards brancos (higher specificity than :root) ── */
+html[data-theme="light"] {
+  --bg: #ede8e2;
+  --bg-card: #ffffff;
+  --bg-elevated: #faf8f6;
+  --bg-elevated-2: #f5f2ee;
+  --border: rgba(120,100,80,0.12);
+  --border-subtle: rgba(120,100,80,0.18);
+  --border-hover: rgba(120,100,80,0.30);
+  --border-faint: rgba(120,100,80,0.07);
+  --text: #1a1410;
+  --text-60: rgba(26,20,16,0.65);
+  --text-50: rgba(26,20,16,0.55);
+  --text-45: rgba(26,20,16,0.50);
+  --text-40: rgba(26,20,16,0.45);
+  --text-35: rgba(26,20,16,0.38);
+  --text-30: rgba(26,20,16,0.32);
+  --text-25: rgba(26,20,16,0.26);
+  --text-20: rgba(26,20,16,0.20);
+  --text-15: rgba(26,20,16,0.15);
+  --hover-bg: rgba(26,20,16,0.04);
+  --hover-bg-sm: rgba(26,20,16,0.07);
+  --hover-bg-xs: rgba(26,20,16,0.025);
+  --invert-bg: #1a1410;
+  --invert-text: #ffffff;
+  --invert-hover: rgba(26,20,16,0.83);
+  --cursor-ring: rgba(0,0,0,0.45);
+  --cursor-dot: #000000;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-background: var(--bg);
+  --color-foreground: var(--text);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  transition: background-color 0.3s ease, color 0.2s ease;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+* {
+  box-sizing: border-box;
+  cursor: none !important;
 }
+
+/* ── Light mode card shadows ── */
+html[data-theme="light"] .card-surface {
+  box-shadow: 0 1px 3px rgba(100,110,160,0.08), 0 4px 18px rgba(100,110,160,0.08);
+}
+html[data-theme="light"] .card-surface-sm {
+  box-shadow: 0 1px 2px rgba(100,110,160,0.06), 0 2px 8px rgba(100,110,160,0.05);
+}
+
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 32s linear infinite;
+}
+
+/* ── Featured project cards ── */
+.feat-row {
+  display: flex;
+  gap: 12px;
+}
+
+.feat-card {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  flex-shrink: 1;
+  flex-basis: 0%;
+  min-width: 0;
+  transition: flex-grow 1.2s ease;
+}
+
+.feat-card img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 1.2s ease;
+}
+
+.feat-card:hover img {
+  transform: scale(1.05);
+}
+
+/* Row 1: starts 3:1 */
+.feat-row-1 .feat-card:first-child { flex-grow: 3; }
+.feat-row-1 .feat-card:last-child  { flex-grow: 1; }
+.feat-row-1:hover .feat-card:first-child { flex-grow: 1.5; }
+.feat-row-1:hover .feat-card:last-child  { flex-grow: 1; }
+.feat-row-1 .feat-card:first-child:hover { flex-grow: 3.5; }
+.feat-row-1 .feat-card:last-child:hover  { flex-grow: 2; }
+
+/* Row 2: starts 1:1 */
+.feat-row-2 .feat-card { flex-grow: 1; }
+.feat-row-2:hover .feat-card        { flex-grow: 0.8; }
+.feat-row-2 .feat-card:hover        { flex-grow: 1.8; }
+
+/* HTML banner iframe scale per row height */
+.feat-row-1 .feat-card { --banner-scale: 0.625; }
+.feat-row-2 .feat-card { --banner-scale: 0.5; }
+
+/* Hide scrollbar */
+.scrollbar-hide { scrollbar-width: none; -ms-overflow-style: none; }
+.scrollbar-hide::-webkit-scrollbar { display: none; }
