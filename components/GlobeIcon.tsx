@@ -26,12 +26,12 @@ interface Props {
 export default function GlobeIcon({ size = 28, rings = true, theme = "dark" }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const rotRef = useRef(0);
-  const rafRef = useRef<number>();
+  const rafRef = useRef<number | null>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
     if (!ctx) return;
 
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
