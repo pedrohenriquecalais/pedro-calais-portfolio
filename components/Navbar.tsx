@@ -8,8 +8,6 @@ interface NavbarProps {
   onThemeToggle: () => void;
   activeSection: string;
   onSectionChange: (section: string) => void;
-  email?: string;
-  whatsapp?: string;
 }
 
 const navLinks = [
@@ -24,8 +22,6 @@ export default function Navbar({
   onThemeToggle,
   activeSection,
   onSectionChange,
-  email,
-  whatsapp,
 }: NavbarProps) {
   const [version] = useState("V1");
   const [scrolled, setScrolled] = useState(false);
@@ -98,15 +94,13 @@ export default function Navbar({
           )}
         </button>
 
-        <a
-          href={whatsapp ?? (email ? `mailto:${email}` : "#")}
-          target="_blank"
-          rel="noreferrer"
+        <button
+          onClick={() => scrollTo("contact")}
           className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[var(--invert-bg)] text-[var(--invert-text)] text-sm font-medium hover:opacity-85 transition-opacity shrink-0 whitespace-nowrap"
         >
-          Contact
+          Contratar
           <ChevronDown size={14} />
-        </a>
+        </button>
       </div>
     </nav>
   );

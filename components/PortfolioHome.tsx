@@ -44,8 +44,6 @@ export default function PortfolioHome() {
         onThemeToggle={() => setTheme((t) => (t === "dark" ? "light" : "dark"))}
         activeSection={activeSection}
         onSectionChange={setActiveSection}
-        email={profile.email}
-        whatsapp={profile.socials.whatsapp}
       />
       {/* Spacer para o navbar fixo */}
       <div className="h-20" />
@@ -97,27 +95,54 @@ export default function PortfolioHome() {
             </div>
 
             {/* Social links grid */}
-            <div className="grid grid-cols-2 gap-3" style={{ overflow: "visible" }}>
-              {(
-                [
-                  { href: profile.socials.cv, Icon: FileText, label: "CV", external: true },
-                  { href: profile.socials.linkedin, Icon: Link, label: "LinkedIn", external: true },
-                  { href: profile.socials.github, Icon: GitFork, label: "GitHub", external: true },
-                  { href: `mailto:${profile.email}`, Icon: Mail, label: "Email", external: false },
-                  { href: profile.socials.whatsapp, Icon: Phone, label: "WhatsApp", external: true },
-                ] as const
-              ).map(({ href, Icon, label, external }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target={external ? "_blank" : undefined}
-                  rel="noreferrer"
-                  className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-6 flex items-center gap-2.5 text-sm text-[var(--text-50)] hover:bg-[var(--hover-bg)] hover:border-[var(--border-hover)] hover:scale-[1.05] hover:z-10 hover:text-[var(--text-60)] transition-all duration-200 relative card-surface"
-                >
-                  <Icon size={15} />
-                  {label}
-                </a>
-              ))}
+            <div className="flex flex-col gap-3" style={{ overflow: "visible" }}>
+              {/* CV + LinkedIn */}
+              <div className="grid grid-cols-2 gap-3">
+                {(
+                  [
+                    { href: profile.socials.cv, Icon: FileText, label: "CV", external: true },
+                    { href: profile.socials.linkedin, Icon: Link, label: "LinkedIn", external: true },
+                  ] as const
+                ).map(({ href, Icon, label, external }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target={external ? "_blank" : undefined}
+                    rel="noreferrer"
+                    className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-6 flex items-center gap-2.5 text-sm text-[var(--text-50)] hover:bg-[var(--hover-bg)] hover:border-[var(--border-hover)] hover:scale-[1.05] hover:z-10 hover:text-[var(--text-60)] transition-all duration-200 relative card-surface"
+                  >
+                    <Icon size={15} />
+                    {label}
+                  </a>
+                ))}
+              </div>
+
+              {/* GitHub + Email + WhatsApp — icon only, text expands on hover */}
+              <div className="flex gap-3 overflow-visible">
+                {(
+                  [
+                    { href: profile.socials.github, Icon: GitFork, label: "GitHub", external: true },
+                    { href: `mailto:${profile.email}`, Icon: Mail, label: "Email", external: false },
+                    { href: profile.socials.whatsapp, Icon: Phone, label: "WhatsApp", external: true },
+                  ] as const
+                ).map(({ href, Icon, label, external }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target={external ? "_blank" : undefined}
+                    rel="noreferrer"
+                    className="group flex-1 min-w-0 rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] py-6 px-4 flex items-center justify-center overflow-hidden text-sm text-[var(--text-50)] hover:bg-[var(--hover-bg)] hover:border-[var(--border-hover)] hover:z-10 hover:text-[var(--text-60)] relative card-surface"
+                    style={{ transition: "min-width 0.3s ease, background-color 0.2s, border-color 0.2s, color 0.2s" }}
+                    onMouseEnter={e => (e.currentTarget.style.minWidth = "140px")}
+                    onMouseLeave={e => (e.currentTarget.style.minWidth = "0px")}
+                  >
+                    <Icon size={15} className="shrink-0" />
+                    <span className="max-w-0 overflow-hidden whitespace-nowrap group-hover:max-w-[120px] group-hover:ml-2 transition-all duration-300 ease-in-out">
+                      {label}
+                    </span>
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
 
@@ -321,7 +346,7 @@ export default function PortfolioHome() {
         <TechMarquee />
 
         {/* ── Certifications ── */}
-        <section id="certifications">
+        <section id="certifications" className="mb-14">
           <h2 className="text-4xl mb-5" style={{ fontFamily: "var(--font-playfair)" }}>Certificações</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {certifications.map((cert) => {
@@ -373,6 +398,58 @@ export default function PortfolioHome() {
                 </div>
               );
             })}
+          </div>
+        </section>
+
+        {/* ── Contact ── */}
+        <section id="contact" className="mt-14 mb-8">
+          <div className="flex items-start justify-between mb-5 gap-4">
+            <h2 className="text-4xl leading-tight" style={{ fontFamily: "var(--font-playfair)" }}>
+              Vamos construir algo juntos?
+            </h2>
+            <span className="text-xs tracking-[0.2em] uppercase font-mono text-[var(--text-25)] text-right mt-2 shrink-0">
+              Aberto a projetos,<br />freela e colabs.
+            </span>
+          </div>
+
+          {/* Email card — full width */}
+          <a
+            href={`mailto:${profile.email}`}
+            className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-6 flex items-center gap-4 mb-3 hover:bg-[var(--hover-bg)] hover:border-[var(--border-hover)] transition-all card-surface block"
+          >
+            <div className="w-12 h-12 rounded-xl bg-[var(--hover-bg-sm)] flex items-center justify-center shrink-0">
+              <Mail size={20} className="text-[var(--text-50)]" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="font-semibold text-[var(--text)]">{profile.email}</p>
+              <p className="text-sm text-[var(--text-40)] mt-0.5">foco em soluções digitais para startups e empresas que valorizam agilidade, qualidade e inovação em cada etapa do projeto.</p>
+            </div>
+          </a>
+
+          {/* Social grid */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            {([
+              { href: profile.socials.linkedin, Icon: Link, label: "LinkedIn", sub: "@pedrohenriquecalais", external: true },
+              { href: profile.socials.github, Icon: GitFork, label: "GitHub", sub: "@pedrohenriquecalais", external: true },
+              { href: profile.socials.cv, Icon: FileText, label: "Currículo", sub: "PDF", external: false },
+              { href: profile.socials.whatsapp, Icon: Phone, label: "WhatsApp", sub: "Mensagem direta", external: true },
+            ] as const).map(({ href, Icon, label, sub, external }) => (
+              <a
+                key={label}
+                href={href}
+                target={external ? "_blank" : undefined}
+                rel="noreferrer"
+                className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-5 flex flex-col gap-3 hover:bg-[var(--hover-bg)] hover:border-[var(--border-hover)] hover:scale-[1.02] transition-all card-surface"
+              >
+                <div>
+                  <Icon size={18} className="text-[var(--text-50)]" />
+                </div>
+                <div>
+                  <p className="font-medium text-sm text-[var(--text)]">{label}</p>
+                  <p className="text-xs text-[var(--text-40)] mt-0.5">{sub}</p>
+                </div>
+              </a>
+            ))}
           </div>
         </section>
       </main>
