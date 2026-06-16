@@ -155,7 +155,9 @@ html[data-theme="light"] .card-surface-sm {
     height: auto !important;
   }
   .feat-row .feat-card {
-    height: 180px !important;
-    flex-grow: 1 !important;
+    height: 200px !important;
+    flex-basis: 200px !important;
+    flex-grow: 0 !important;
+    flex-shrink: 0 !important;
   }
 }

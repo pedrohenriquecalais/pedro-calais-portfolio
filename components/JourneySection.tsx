@@ -71,12 +71,12 @@ export default function JourneySection() {
     <section id="journey" className="mb-14">
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-4xl" style={{ fontFamily: "var(--font-playfair)" }}>Trajetória Profissional</h2>
-        <span className="text-xs tracking-[0.25em] uppercase font-mono text-[var(--text-25)]">
+        <span className="hidden sm:block text-xs tracking-[0.25em] uppercase font-mono text-[var(--text-25)]">
           &gt;_ FORMAÇÃO &amp; EXPERIÊNCIA
         </span>
       </div>
 
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         {/* Formação Acadêmica */}
         <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-5 flex flex-col gap-4 card-surface">
           <div className="flex items-center gap-2 mb-1">
