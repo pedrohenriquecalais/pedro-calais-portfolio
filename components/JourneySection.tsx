@@ -36,6 +36,14 @@ function TiltCard({ children }: { children: React.ReactNode }) {
   );
 }
 
+function isDark(hex: string) {
+  const c = hex.replace("#", "");
+  const r = parseInt(c.slice(0, 2), 16);
+  const g = parseInt(c.slice(2, 4), 16);
+  const b = parseInt(c.slice(4, 6), 16);
+  return (r * 299 + g * 587 + b * 114) / 1000 < 128;
+}
+
 function CompanyIcon({
   shortName,
   color,
@@ -45,6 +53,7 @@ function CompanyIcon({
   color: string;
   logo?: string;
 }) {
+  const dark = isDark(color);
   return (
     <div
       className="w-14 h-14 rounded-xl shrink-0 flex items-center justify-center overflow-hidden"
@@ -55,6 +64,7 @@ function CompanyIcon({
           src={logo}
           alt={shortName}
           className="w-full h-full object-contain p-1.5"
+          style={dark ? { mixBlendMode: "screen" } : undefined}
         />
       ) : (
         <span className="text-xs font-bold text-white/60 tracking-wide">
