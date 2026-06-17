@@ -181,8 +181,17 @@ export const certifications = [
     link: "",
     image: "/certificates/python-dsa.jpg",
   },
-  {
+   {
     id: 2,
+    title: "Por dentro da Segurança Cibernética",
+    issuer: "SENAI",
+    date: "Jun 2026",
+    badge: "SENAI",
+    link: "https://www.sp.senai.br/consulta-certificado?qrcode=00038491/8509460",
+    image: "/certificates/segurança_cinbernetica.png",
+  },
+  {
+    id: 3,
     title: "Soluções de IA no GitHub",
     issuer: "Fundação Bradesco",
     date: "Out 2025",
@@ -190,27 +199,9 @@ export const certifications = [
     link: "https://lms.ev.org.br/mpls/Web/Lms/Student/PrintCertificateDownload.ashx?uid=12975933&p=WxnJosnXWXTGCsoNKVXSr9Cm39XOSrCW",
     image: "/certificates/ianogithub.jpg",
   },
-  {
-    id: 3,
-    title: "Introduction to Generative AI",
-    issuer: "Google Cloud Skills Boost",
-    date: "2025",
-    badge: "GOOGLE",
-    link: "",
-    image: "",
-  },
-  {
-    id: 4,
-    title: "Curso de Excel",
-    issuer: "SENAI",
-    date: "2020",
-    badge: "SENAI",
-    link: "",
-    image: "",
-  },
 
   {
-    id: 5,
+    id: 4,
     title: "Certificado Investidor 180",
     issuer: "XP Educação",
     date: " SET 2025",
@@ -218,6 +209,7 @@ export const certifications = [
     link: "https://ava.xpeducacao.com.br/d2l/awards/assertions/3923/view",
     image: "/certificates/xp180.png",
   },
+  
 ];
 
 export const journey = {

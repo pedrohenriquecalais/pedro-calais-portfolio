@@ -54,7 +54,7 @@ export default function CustomCursor() {
   }, []);
 
   return (
-    <>
+    <div className="hidden md:contents">
       <div
         ref={ringRef}
         style={{
@@ -87,6 +87,6 @@ export default function CustomCursor() {
           willChange: "transform",
         }}
       />
-    </>
+    </div>
   );
 }
