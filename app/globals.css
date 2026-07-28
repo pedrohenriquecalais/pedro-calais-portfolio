@@ -128,11 +128,11 @@ html[data-theme="light"] .card-surface-sm {
 }
 
 /* Row 1: starts 2:2 */
-.feat-row-1 .feat-card:first-child { flex-grow: 2.5; }
+.feat-row-1 .feat-card:first-child { flex-grow: 3; }
 .feat-row-1 .feat-card:last-child  { flex-grow: 2; }
-.feat-row-1:hover .feat-card:first-child { flex-grow: 1.5; }
+.feat-row-1:hover .feat-card:first-child { flex-grow: 3; }
 .feat-row-1:hover .feat-card:last-child  { flex-grow: 1; }
-.feat-row-1 .feat-card:first-child:hover { flex-grow: 3.5; }
+.feat-row-1 .feat-card:first-child:hover { flex-grow: 3; }
 .feat-row-1 .feat-card:last-child:hover  { flex-grow: 2; }
 
 /* Row 2: starts 1:1 */
