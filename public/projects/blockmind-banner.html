@@ -8,7 +8,7 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    width: 860px;
+    width: 3000px;
     height: 480px;
     overflow: hidden;
     font-family: 'Inter', -apple-system, sans-serif;
@@ -16,7 +16,7 @@
   }
 
   .banner {
-    width: 860px;
+    width: 950px;
     height: 480px;
     position: relative;
     background: #090A0C;
@@ -28,7 +28,7 @@
   .bg-svg {
     position: absolute;
     inset: 0;
-    width: 860px;
+    width: 950px;
     height: 480px;
     pointer-events: none;
   }
@@ -234,7 +234,7 @@
 <div class="banner">
 
   <!-- ── Background ── -->
-  <svg class="bg-svg" viewBox="0 0 860 480" xmlns="http://www.w3.org/2000/svg">
+  <svg class="bg-svg" viewBox="0 0 950 480" xmlns="http://www.w3.org/2000/svg">
     <defs>
       <!-- Subtle green warmth toward center-right -->
       <radialGradient id="bg" cx="62%" cy="48%" r="55%">
@@ -249,17 +249,17 @@
       </radialGradient>
     </defs>
 
-    <rect width="860" height="480" fill="url(#bg)"/>
-    <rect width="860" height="480" fill="url(#vgn)"/>
+    <rect width="950" height="480" fill="url(#bg)"/>
+    <rect width="950" height="480" fill="url(#vgn)"/>
 
     <!-- ── Perspective build grid (floor, bottom half) ── -->
     <!-- VP: (820, 262). Lines only in bottom 240px of banner -->
     <g stroke="#10B981" stroke-width="0.55" fill="none">
       <!-- Horizontal bands -->
-      <line x1="0" y1="318" x2="860" y2="318" opacity="0.038"/>
-      <line x1="0" y1="355" x2="860" y2="355" opacity="0.030"/>
-      <line x1="0" y1="396" x2="860" y2="396" opacity="0.024"/>
-      <line x1="0" y1="440" x2="860" y2="440" opacity="0.018"/>
+      <line x1="0" y1="318" x2="950" y2="318" opacity="0.038"/>
+      <line x1="0" y1="355" x2="950" y2="355" opacity="0.030"/>
+      <line x1="0" y1="396" x2="950" y2="396" opacity="0.024"/>
+      <line x1="0" y1="440" x2="950" y2="440" opacity="0.018"/>
 
       <!-- Converging lines from VP (820, 262) to bottom edge -->
       <line x1="820" y1="262" x2="0"   y2="480" opacity="0.034"/>
@@ -272,6 +272,8 @@
       <line x1="820" y1="262" x2="602" y2="480" opacity="0.018"/>
       <line x1="820" y1="262" x2="688" y2="480" opacity="0.016"/>
       <line x1="820" y1="262" x2="774" y2="480" opacity="0.014"/>
+      <line x1="820" y1="262" x2="860" y2="480" opacity="0.012"/>
+      <line x1="820" y1="262" x2="950" y2="480" opacity="0.010"/>
     </g>
 
     <!-- ── Wireframe voxel stack — upper right ── -->

@@ -303,7 +303,7 @@ export default function PortfolioHome() {
                         src={htmlBanner}
                         className="border-0 pointer-events-none absolute top-0 overflow-hidden"
                         style={{
-                          width: 860,
+                          width: bannerAnchor === "left" ? 2200 : 800,
                           height: 480,
                           ...(bannerAnchor === "left"
                             ? { left: 0, transformOrigin: "top left" }
