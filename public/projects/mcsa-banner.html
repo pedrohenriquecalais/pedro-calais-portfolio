@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 860px;
+    height: 480px;
+    overflow: hidden;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #F5F6F8;
+  }
+
+  .banner {
+    width: 860px;
+    height: 480px;
+    position: relative;
+    background: linear-gradient(150deg, #EEF0F5 0%, #F6F7FA 40%, #FFFFFF 100%);
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  /* Subtle grid */
+  .grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,0,0,0.028) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,0,0,0.028) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  /* Soft vignette on the right */
+  .vignette {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 85% 50%, rgba(255,255,255,0) 40%, rgba(245,246,248,0.5) 100%);
+    pointer-events: none;
+  }
+
+  /* Left text */
+  .left {
+    position: relative;
+    z-index: 10;
+    padding: 0 0 0 58px;
+    width: 295px;
+    flex: 0 0 auto;
+  }
+
+  .badges {
+    display: flex;
+    gap: 7px;
+    margin-bottom: 20px;
+  }
+
+  .badge {
+    font-size: 11px;
+    font-weight: 500;
+    color: #4B5563;
+    background: rgba(255,255,255,0.85);
+    border: 1px solid #E2E5EA;
+    border-radius: 8px;
+    padding: 4px 11px;
+    letter-spacing: 0.01em;
+    backdrop-filter: blur(4px);
+  }
+
+  .title {
+    font-size: 22px;
+    font-weight: 600;
+    color: #111827;
+    line-height: 1.25;
+    letter-spacing: -0.5px;
+    margin-bottom: 12px;
+  }
+
+  .divider {
+    width: 32px;
+    height: 1.5px;
+    background: #D1D5DB;
+    margin-bottom: 12px;
+    border-radius: 2px;
+  }
+
+  .description {
+    font-size: 12.5px;
+    font-weight: 400;
+    color: #6B7280;
+    line-height: 1.7;
+    max-width: 215px;
+  }
+
+  /* Right: MacBook */
+  .right {
+    position: relative;
+    z-index: 10;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding-right: 20px;
+  }
+
+  .macbook-scene {
+    transform: perspective(2200px) rotateY(-7deg) rotateX(2deg);
+    filter:
+      drop-shadow(0 40px 80px rgba(0,0,0,0.13))
+      drop-shadow(0 12px 28px rgba(0,0,0,0.08))
+      drop-shadow(0 2px 6px rgba(0,0,0,0.05));
+    animation: float 6s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%, 100% { transform: perspective(2200px) rotateY(-7deg) rotateX(2deg) translateY(0px); }
+    50%       { transform: perspective(2200px) rotateY(-7deg) rotateX(2deg) translateY(-7px); }
+  }
+
+  /* Lid */
+  .lid {
+    width: 450px;
+    height: 280px;
+    background: linear-gradient(170deg, #3A3A3C 0%, #2A2A2C 55%, #1C1C1E 100%);
+    border-radius: 14px 14px 4px 4px;
+    padding: 14px 14px 10px;
+    position: relative;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
+  }
+
+  /* Camera */
+  .camera {
+    position: absolute;
+    top: 7px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 7px;
+    height: 7px;
+    background: #111;
+    border-radius: 50%;
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.06);
+  }
+
+  /* Screen */
+  .screen {
+    width: 100%;
+    height: 100%;
+    background: #1A1A1C;
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* macOS title bar */
+  .titlebar {
+    flex: 0 0 22px;
+    background: #232325;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .traffic-lights {
+    display: flex;
+    gap: 6px;
+  }
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+  .dot-red    { background: #FF5F57; box-shadow: 0 0 4px rgba(255,95,87,0.5); }
+  .dot-yellow { background: #FEBC2E; box-shadow: 0 0 4px rgba(254,188,46,0.4); }
+  .dot-green  { background: #28C840; box-shadow: 0 0 4px rgba(40,200,64,0.4); }
+
+  /* Image area */
+  .screen-img {
+    flex: 1;
+    overflow: hidden;
+  }
+
+  .screen-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 20% 50%;
+    display: block;
+    opacity: 0.97;
+  }
+
+  /* Hinge */
+  .hinge {
+    width: 450px;
+    height: 3px;
+    background: linear-gradient(90deg, #111 0%, #2C2C2E 30%, #2C2C2E 70%, #111 100%);
+  }
+
+  /* Base */
+  .base {
+    width: 470px;
+    height: 16px;
+    margin-left: -10px;
+    background: linear-gradient(180deg, #3C3C3E 0%, #2C2C2E 60%, #232325 100%);
+    border-radius: 0 0 8px 8px;
+    position: relative;
+  }
+
+  /* Trackpad notch */
+  .base::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 72px;
+    height: 5px;
+    background: #1A1A1C;
+    border-radius: 0 0 5px 5px;
+  }
+</style>
+</head>
+<body>
+<div class="banner">
+  <div class="grid"></div>
+  <div class="vignette"></div>
+
+  <!-- Left -->
+  <div class="left">
+    <div class="badges">
+      <span class="badge">React</span>
+      <span class="badge">Flask</span>
+      <span class="badge">SQL Server</span>
+    </div>
+    <div class="title">MCSA —<br>Plataforma de Gestão</div>
+    <div class="divider"></div>
+    <div class="description">Plataforma full stack desenvolvida para centralizar a operação jurídica, reunindo indicadores, carteiras, relatórios e automações em uma única interface.</div>
+  </div>
+
+  <!-- Right -->
+  <div class="right">
+    <div class="macbook-scene">
+      <div class="lid">
+        <div class="camera"></div>
+        <div class="screen">
+          <div class="titlebar">
+            <div class="traffic-lights">
+              <div class="dot dot-red"></div>
+              <div class="dot dot-yellow"></div>
+              <div class="dot dot-green"></div>
+            </div>
+          </div>
+          <div class="screen-img">
+            <img src="/projects/mcsa-dashboard.png" alt="MCSA Dashboard" />
+          </div>
+        </div>
+      </div>
+      <div class="hinge"></div>
+      <div class="base"></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

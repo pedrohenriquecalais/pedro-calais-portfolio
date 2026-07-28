@@ -10,7 +10,7 @@ import JourneySection from "./JourneySection";
 import GlobeIcon from "./GlobeIcon";
 import TechMarquee from "./TechMarquee";
 import { profile, projects, showcase, recentContent, certifications } from "@/lib/mock-data";
-import { FileText, Link, GitFork, Award, Mail, Phone, ZoomIn, X } from "lucide-react";
+import { FileText, Link, GitFork, Award, Mail, Phone, ZoomIn, X, TrendingUp } from "lucide-react";
 
 export default function PortfolioHome() {
   const [theme, setTheme] = useState<"dark" | "light">("dark");
@@ -286,6 +286,8 @@ export default function PortfolioHome() {
             const Card = ({ p }: { p: typeof projects[0] }) => {
               const hasSummary = Boolean((p as any).summary);
               const htmlBanner: string | undefined = (p as any).htmlBanner;
+              const suppressOverlay = Boolean((p as any).suppressOverlay);
+              const bannerAnchor: "left" | "center" = (p as any).bannerAnchor ?? "center";
               const Tag = (p.link && !hasSummary ? "a" : "div") as React.ElementType;
               return (
                 <Tag
@@ -303,25 +305,29 @@ export default function PortfolioHome() {
                         style={{
                           width: 860,
                           height: 480,
-                          left: "50%",
-                          marginLeft: -430,
-                          transformOrigin: "top center",
+                          ...(bannerAnchor === "left"
+                            ? { left: 0, transformOrigin: "top left" }
+                            : { left: "50%", marginLeft: -430, transformOrigin: "top center" }),
                           transform: "scale(var(--banner-scale, 0.625))",
                         }}
                       />
                     </div>
                   )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
-                  <div className="absolute bottom-0 left-0 right-0 p-4">
-                    <div className="flex flex-wrap gap-1.5 mb-2">
-                      {p.tags.map(tag => (
-                        <span key={tag} className="text-[10px] uppercase tracking-wide bg-black/50 backdrop-blur-sm border border-white/15 rounded-full px-2.5 py-0.5 text-white/70">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                    <h3 className="text-white font-semibold text-base leading-tight">{p.title}</h3>
-                  </div>
+                  {!suppressOverlay && (
+                    <>
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
+                      <div className="absolute bottom-0 left-0 right-0 p-4">
+                        <div className="flex flex-wrap gap-1.5 mb-2">
+                          {p.tags.map(tag => (
+                            <span key={tag} className="text-[10px] uppercase tracking-wide bg-black/50 backdrop-blur-sm border border-white/15 rounded-full px-2.5 py-0.5 text-white/70">
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                        <h3 className="text-white font-semibold text-base leading-tight">{p.title}</h3>
+                      </div>
+                    </>
+                  )}
                 </Tag>
               );
             };
@@ -474,9 +480,60 @@ export default function PortfolioHome() {
             </div>
 
             <div className="px-6 py-5 flex flex-col gap-6">
-              <p className="text-sm text-[var(--text-50)] leading-relaxed">
-                {(summaryProject as any).summary.description}
-              </p>
+              <div className="flex flex-col gap-3 max-w-prose">
+                {(Array.isArray((summaryProject as any).summary.description)
+                  ? (summaryProject as any).summary.description
+                  : [(summaryProject as any).summary.description]
+                ).map((para: string, i: number) => (
+                  <p key={i} className="text-sm text-[var(--text-50)] leading-[1.8]">
+                    {para.split(/\*\*(.*?)\*\*/g).map((part, j) =>
+                      j % 2 === 1
+                        ? <strong key={j} className="text-[var(--text)] font-semibold">{part}</strong>
+                        : part
+                    )}
+                  </p>
+                ))}
+              </div>
+
+              {(summaryProject as any).summary.impact && (
+                <div className="rounded-xl border border-[var(--border)] bg-[var(--hover-bg-xs)] px-4 py-3 flex gap-3 items-start">
+                  <TrendingUp size={15} className="text-[var(--accent)] mt-0.5 shrink-0" />
+                  <p className="text-sm text-[var(--text-60)] leading-[1.8]">{(summaryProject as any).summary.impact}</p>
+                </div>
+              )}
+
+              {(summaryProject as any).summary.story?.length > 0 && (
+                <div className="flex flex-col gap-3">
+                  <p className="text-[10px] uppercase tracking-[0.2em] text-[var(--text-30)] font-mono">
+                    {(summaryProject as any).summary.storyTitle ?? "Decisões de Projeto"}
+                  </p>
+                  <div className="flex flex-col gap-4">
+                    {((summaryProject as any).summary.story as { title: string; body: string }[]).map((item, i) => (
+                      <div key={i} className="flex gap-3 items-start">
+                        <span className="text-[var(--text-20)] font-mono text-xs mt-1 shrink-0">{String(i + 1).padStart(2, "0")}</span>
+                        <div className="flex flex-col gap-1">
+                          <p className="text-sm font-medium text-[var(--text-70)]">{item.title}</p>
+                          <p className="text-sm text-[var(--text-50)] leading-[1.8]">{item.body}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {(summaryProject as any).summary.features?.length > 0 && (
+                <div className="flex flex-col gap-3">
+                  <p className="text-[10px] uppercase tracking-[0.2em] text-[var(--text-30)] font-mono">Principais Funcionalidades</p>
+                  <div className="flex flex-col gap-2">
+                    {((summaryProject as any).summary.features as string[]).map((feat, i) => (
+                      <div key={i} className="flex gap-2.5 items-start">
+                        <span className="text-[var(--accent)] mt-1 shrink-0 text-xs">—</span>
+                        <p className="text-sm text-[var(--text-50)] leading-[1.6]">{feat}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
 
               {(["frontend", "backend", "database"] as const).map((section) => {
                 const rows: { tech: string; uso: string }[] = (summaryProject as any).summary[section];

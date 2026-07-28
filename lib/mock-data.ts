@@ -21,15 +21,70 @@ export const profile = {
 
 export const projects = [
   {
+    id: 3,
+    title: "BlockMind — Plataforma de IA para Roblox",
+    description: "Plataforma em desenvolvimento para desenvolvedores de Roblox que querem usar IA para acelerar a criação de jogos, gerar scripts Lua, aprender Roblox Studio e acessar prompts e ferramentas técnicas em um único ambiente.",
+    tags: ["IA", "Roblox", "Next.js", "TypeScript"],
+    image: "",
+    htmlBanner: "/projects/blockmind-banner.html",
+    bannerAnchor: "left",
+    color: "#09090B",
+    link: "",
+    summary: {
+      description: [
+        "A ideia do **BlockMind** nasceu de uma frustração real: ferramentas como ChatGPT, Claude e similares funcionam bem para programação geral, mas falham no contexto do Roblox. Propriedades da engine, eventos de LocalScript, a API do DataStore, as regras de FilteringEnabled — nada disso está bem representado nos modelos genéricos. O código gerado parece certo, mas quebra na prática.",
+        "A plataforma centraliza tudo que um desenvolvedor Roblox precisa: assistente treinado no ecossistema, biblioteca de prompts curados, snippets testados, documentação contextual e ferramentas de produtividade. Um ambiente completo para quem leva o desenvolvimento de jogos a sério.",
+      ],
+      impact: "🚧 Construído por alguém que desenvolve jogos no Roblox e sentiu o problema na prática — não é um wrapper de ChatGPT.",
+      storyTitle: "Como surgiu a ideia",
+      story: [
+        { title: "O gap que nenhuma IA resolve", body: "Modelos genéricos geram código Lua que parece correto mas quebra no Roblox: LocalScripts acessando o servidor, RemoteEvents mal configurados, DataStores sem os yields certos. Os erros são previsíveis porque nenhum modelo foi treinado especificamente para o ambiente. O Roblox AI foi construído para fechar esse gap de contexto." },
+        { title: "Acabar com a aba-infinita do dev", body: "Quem desenvolve no Roblox conhece o ciclo: DevHub numa aba, YouTube em outra, DevForum, ChatGPT, projeto antigo aberto no Studio para copiar um trecho. O Roblox AI condensa isso — geração de código, documentação contextual, snippets e explicações em português, tudo em um único ambiente sem interrupção de fluxo." },
+        { title: "Uma plataforma, não um produto descartável", body: "A arquitetura foi pensada para crescer além do assistente. O roadmap inclui análise estática de código Lua, geração de assets, templates por gênero de jogo, organização modular de projetos e métricas de performance — construindo algo com visão de produto, não apenas um experimento técnico." },
+      ],
+      features: [
+        "Assistente com contexto real do ecossistema Roblox e das APIs do Studio",
+        "Geração de scripts Lua que funcionam — sem adaptação manual",
+        "Biblioteca de prompts curados para cenários comuns do desenvolvimento",
+        "Snippets testados, organizados por categoria: UI, Physics, DataStore, Combat...",
+        "Tutoriais técnicos em português sobre Roblox Studio",
+        "Busca contextual por documentação oficial da plataforma",
+      ],
+      frontend: [
+        { tech: "Next.js", uso: "Framework da aplicação" },
+        { tech: "React", uso: "Construção da interface" },
+        { tech: "TypeScript", uso: "Tipagem estática" },
+        { tech: "Tailwind CSS", uso: "Estilização" },
+        { tech: "MDX", uso: "Conteúdo técnico e documentação" },
+      ],
+      backend: [
+        { tech: "OpenAI API", uso: "Geração de código e respostas especializadas" },
+        { tech: "Vercel", uso: "Deploy e execução das funções serverless" },
+      ],
+    },
+  },
+  {
     id: 1,
     title: "MCSA — Plataforma de Gestão",
     description: "Sistema interno de gestão para o escritório de recuperação de créditos Marcelo Candiotto Sociedade de Advogados. Dashboard com autenticação, relatórios e consultas em SQL Server.",
     tags: ["TypeScript", "Next.js", "SQL Server"],
-    image: "/projects/mcsa-dashboard.png",
-    color: "#e8eef5",
+    image: "",
+    htmlBanner: "/projects/mcsa-banner.html",
+    suppressOverlay: true,
+    bannerAnchor: "left",
+    color: "#F5F6F8",
     link: "",
     summary: {
-      description: "Sistema full stack desenvolvido internamente para o escritório de recuperação de créditos Marcelo Candiotto Sociedade de Advogados. A plataforma centraliza a gestão de processos, permite consultas ao SQL Server, visualização de dados com gráficos, geração de relatórios e exportação para Excel. A API em Flask + Python processa os dados com Pandas e conecta ao banco via pyodbc + SQLAlchemy, com Redis para otimizar consultas pesadas.",
+      description: [
+        "Sistema full stack desenvolvido internamente para o escritório Marcelo Candiotto Sociedade de Advogados. A plataforma centraliza a gestão operacional da recuperação de crédito, reunindo indicadores, consultas ao SQL Server, dashboards interativos e geração de relatórios em um único ambiente.",
+        "O backend foi desenvolvido em Flask + Python, utilizando Pandas para processamento de grandes volumes de dados e SQLAlchemy + pyodbc para integração com o SQL Server. O uso de Redis reduziu o tempo de resposta das consultas mais pesadas através de cache inteligente.",
+      ],
+      story: [
+        { title: "Resolver um problema real", body: "O escritório dependia de planilhas e consultas manuais ao banco de dados para acompanhar indicadores. O objetivo foi transformar essas informações em uma plataforma intuitiva, permitindo que qualquer pessoa da operação encontrasse os dados necessários em poucos cliques." },
+        { title: "Priorizar desempenho", body: "Grande parte das consultas envolvia milhares de registros. Para manter a interface rápida, o processamento pesado foi concentrado no backend, utilizando cache com Redis e tratamento dos dados antes do envio ao frontend." },
+        { title: "Facilitar a adoção", body: "A plataforma precisava ser utilizada imediatamente pela equipe, sem treinamento extenso. Por isso, a interface foi projetada para reduzir cliques, destacar os indicadores mais importantes e apresentar cada informação no contexto correto." },
+      ],
+      impact: "Utilizado diariamente pela equipe para acompanhar processos, analisar carteiras e gerar relatórios operacionais, substituindo processos manuais que consumiam horas de trabalho semanalmente.",
       frontend: [
         { tech: "React 18", uso: "Framework UI" },
         { tech: "TypeScript", uso: "Tipagem estática" },
@@ -79,7 +134,7 @@ export const projects = [
     },
   },
   {
-    id: 3,
+    id: 4,
     title: "Estudos em Machine Learning",
     description: "Repositório de estudos práticos em ML e LLMs, aplicando modelos e técnicas aprendidas nos cursos da Data Science Academy e Google Cloud.",
     tags: ["Python", "ML", "Data Science"],
@@ -88,7 +143,7 @@ export const projects = [
     link: "https://github.com/pedrohenriquecalais",
   },
   {
-    id: 4,
+    id: 5,
     title: "Projetos Web com TypeScript",
     description: "Aplicações web desenvolvidas com TypeScript e JavaScript, explorando automação, APIs e interfaces funcionais alinhadas às boas práticas.",
     tags: ["TypeScript", "JavaScript", "Vercel"],
